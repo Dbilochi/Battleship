@@ -12,6 +12,30 @@ class FileReaderWriter
     data_g
   end
 
+  def write(data, result)
+    File.open('result.txt', 'w') do |f|
+      data.each_with_index  do |d,i|
+        f.puts d[0]
+        d[1][0].each do |d1|
+          d1.each do |m|
+            f.print ' '
+            f.print m
+          end
+          f.print "\n"
+        end
+      end
+      f.print "\n"
+      data.each_with_index do |d,i|
+        f.print d[0]
+        f.print ' '
+        f.print d[1][1]
+        f.print "\n"
+      end
+      f.print "\n"
+      f.print result
+    end
+  end
+
   private
 
   def self.open

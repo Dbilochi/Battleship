@@ -1,4 +1,5 @@
 require_relative 'FileReaderWriter'
+require_relative 'Player'
 class Battleship
 
   attr_reader :player1, :player2, :file, :file_data
@@ -26,5 +27,24 @@ class Battleship
     @grid2, @hit2 = @player2.target(missile_position_p2)
   end
 
+  def output
+    @file.write({'Player1':[@grid1, @hit1], 'Player2': [@grid2,@hit2]}, battle_result)
+  end
+
+
+  def battle_result
+    if @hit1 == @hit2
+      'It is a draw'
+    elsif @hit1 > @hit2
+      'Player 1 wins'
+    elsif @hit2 > @hit1
+      'Player 2 wins'
+    end
+  end
 
 end
+
+bat = Battleship.new(Player.new, Player.new)
+bat.start_play
+bat.fire
+bat.output
