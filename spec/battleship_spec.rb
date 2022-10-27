@@ -30,4 +30,13 @@ describe Battleship do
     bat.start_play
   end
 
+  it 'on fire, players should call to target their missiles on opponent ships' do
+    bat = Battleship.new(player1,player2)
+
+    expect(bat.player1).to receive(:target).with(bat.file.format(bat.file_data["p2_target_position"]))
+    expect(bat.player2).to receive(:target).with(bat.file.format(bat.file_data["p1_target_position"]))
+
+    bat.fire
+  end
+
 end

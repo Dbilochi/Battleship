@@ -18,5 +18,13 @@ class Battleship
     @player2.place_ships_in_grid(@file.format(@file_data["p2_ship_positions"]))
   end
 
+  def fire
+    missile_position_p1 = @file.format(@file_data["p2_target_position"])
+    missile_position_p2 = @file.format(@file_data["p1_target_position"])
+
+    @grid1, @hit1 = @player1.target(missile_position_p1)
+    @grid2, @hit2 = @player2.target(missile_position_p2)
+  end
+
 
 end
