@@ -18,4 +18,16 @@ describe Battleship do
     expect(bat.file).to be_a FileReaderWriter
   end
 
+  it 'player should call to place ships in the grid on game start' do
+    bat = Battleship.new(player1,player2)
+
+    expect(bat.player1).to receive(:create_grid).with(bat.file_data['grid_size'].to_i)
+    expect(bat.player1).to receive(:place_ships_in_grid).with(bat.file.format(bat.file_data["p1_ship_positions"]))
+
+    expect(bat.player2).to receive(:create_grid).with(bat.file_data['grid_size'].to_i)
+    expect(bat.player2).to receive(:place_ships_in_grid).with(bat.file.format(bat.file_data["p2_ship_positions"]), )
+
+    bat.start_play
+  end
+
 end

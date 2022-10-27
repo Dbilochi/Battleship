@@ -6,6 +6,12 @@ class FileReaderWriter
     FileReaderWriter.file_attributes
   end
 
+  def format(data)
+    data_p = data.split(":")
+    data_g = data_p.map { |s| s.split(",") }
+    data_g
+  end
+
   private
 
   def self.open
